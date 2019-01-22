@@ -10,11 +10,15 @@ namespace NsonsaKisala_Exercise5
     {
         static void Main(string[] args)
         {
+            Console.Clear();
+            Console.WriteLine("Welcome to R.P.S.L.S.");
+            Console.WriteLine("**********If you don't know how to play, type \"rules\"");
             bool menuIsRunning = true;
 
             while (menuIsRunning)
             {
                 // Menu Method Call
+                
                 Menu();
 
                 //Prompt user for input
@@ -30,23 +34,31 @@ namespace NsonsaKisala_Exercise5
                 // Case switch user input
                 switch (userInput)
                 {
-                    case "paper":
-                        //paper
-                        break;
                     case "rock":
                         //rock
+                        Matchup(userInput);
+                        break;
+                    case "paper":
+                        //paper
+                        Matchup(userInput);
                         break;
                     case "scissors":
                         //scissors
+                        Matchup(userInput);
                         break;
                     case "lizard":
                         //lizard
+                        Matchup(userInput);
                         break;
                     case "spock":
                         //spock
+                        Matchup(userInput);
+                        break;
+                    case "rules":
+                        Rules();
                         break;
                     case "exit":
-                        //exit
+                        
                         Console.Clear();
 
                         bool exitMenuIsRunning = true;
@@ -92,17 +104,54 @@ namespace NsonsaKisala_Exercise5
                 }
             }
         }
-
+        // Method for the menu
         public static void Menu()
         {
             Console.WriteLine();
             Console.WriteLine("Which do you choose: \n" +
-                    "Paper \n" +
                     "Rock \n" +
+                    "Paper \n" +
                     "Scissors \n" +
                     "Lizard \n" +
                     "Spock");
             Console.WriteLine("-------------------------");
+        }
+
+        // Method for the rules
+        public static void Rules()
+        {
+            Console.WriteLine("" +
+                "Rock > Scissors \n" +
+                "Scissors > Paper \n" +
+                "Paper > Rock \n" +
+                "Rock > Lizard \n" +
+                "Lizard > Spock \n" +
+                "Spock > Scissors \n" +
+                "Scissors > Lizard \n" +
+                "Lizard > Paper \n" +
+                "Paper > Spock \n" +
+                "Spock > Rock \n"); 
+        }
+
+        public static void Matchup(string input)
+        {
+            // Store list of possible options
+            List<string> optionsList = new List<string>();
+            optionsList.Add("rock");
+            optionsList.Add("paper");
+            optionsList.Add("scissors");
+            optionsList.Add("lizard");
+            optionsList.Add("spock");
+
+            // Create Randomizer
+            Random rnd = new Random();
+            int num = rnd.Next(optionsList.Count());
+
+            // Conditionals
+
+            // Print to console
+            Console.Clear();
+            Console.WriteLine("You chose - {0} \nThe computer chose - {1}", input, optionsList[num]);
         }
     }
 }
