@@ -10,16 +10,18 @@ namespace NsonsaKisala_Exercise5
     {
         static void Main(string[] args)
         {
+
+            bool menuIsRunning = true;
+
             Console.Clear();
             Console.WriteLine("Welcome to R.P.S.L.S.");
             Console.WriteLine("**********If you don't know how to play, type \"rules\"");
             Console.WriteLine("**********If you wan't to know the score, type \"score\"");
-            bool menuIsRunning = true;
+            
 
             while (menuIsRunning)
             {
                 // Menu Method Call
-                
                 Menu();
 
                 //Prompt user for input
@@ -32,12 +34,44 @@ namespace NsonsaKisala_Exercise5
                     userInput = Console.ReadLine().ToLower();
                 }
 
+                // Keep track of scores
+                //int rounds = 0;
+                int userScore = 0;
+                int computerScore = 0;
+                //int userTotal = 0;
+                //int computerTotal = 0;
+
+                
+
+                // Store list of possible options
+                List<string> optionsList = new List<string>();
+                optionsList.Add("rock");
+                optionsList.Add("paper");
+                optionsList.Add("scissors");
+                optionsList.Add("lizard");
+                optionsList.Add("spock");
+
+                // Create Randomizer
+                Random rnd = new Random();
+                int key = rnd.Next(optionsList.Count());
+
+                int userChoiceValue = ChoiceValueNums(userInput);
+                int compChoiceValue = ChoiceValueNums(optionsList[key]);
+
+                // Print to console
+                Console.Clear();
+                Console.WriteLine("You chose - {0} \nThe computer chose - {1}", userInput, optionsList[key]);
+
+                // Print Score
+                Console.WriteLine("You : {0} \nComputer : {1}", userScore, computerScore);
+
                 // Case switch user input
                 switch (userInput)
                 {
                     case "rock":
                         //rock
                         Matchup(userInput);
+                        
                         break;
                     case "paper":
                         //paper
@@ -106,8 +140,36 @@ namespace NsonsaKisala_Exercise5
                         Console.WriteLine("Not a valid input. Choose one of the options from the menu.");
                         break;
                 }
+
+                
+
+
+                // Conditionals
+                if (((compChoiceValue + 1) % 5) == userChoiceValue)
+                {
+                    Console.WriteLine("You Win");
+                    userScore++;
+                }
+                else if (((compChoiceValue + 2) % 5) == userChoiceValue)
+                {
+                    Console.WriteLine("You Win");
+                    userScore++;
+                }
+                else if (compChoiceValue == userChoiceValue)
+                {
+                    Console.WriteLine("Draw \nNo points given");
+                }
+                else
+                {
+                    Console.WriteLine("You Lose");
+                    computerScore++;
+                }
+
+                
             }
         }
+
+        // METHODS --------------------------------------------------
         // Method for the menu
         public static void Menu()
         {
@@ -139,124 +201,122 @@ namespace NsonsaKisala_Exercise5
 
         public static void Matchup(string input)
         {
-            // Keep track of scores
-            //int rounds = 0;
-            int userScore = 0;
-            int computerScore = 0;
-            int userTotal = 0;
-            //int computerTotal = 0;
+            
 
-            // Store list of possible options
-            List<string> optionsList = new List<string>();
-            optionsList.Add("rock");
-            optionsList.Add("paper");
-            optionsList.Add("scissors");
-            optionsList.Add("lizard");
-            optionsList.Add("spock");
+            //    // If Draw
+            //    if (input == optionsList[key])
+            //    {
+            //        Console.WriteLine("Draw \nNo points given");
+            //    }
+            //    // Rock Block --------------------------------------------------------------------------------
+            //    if ((input == "rock") && (optionsList[key] == "paper"  || optionsList[key] == "spock" ))
+            //    {
+            //        Console.WriteLine("You Lose");
+            //        computerScore++;
+            //    }
+            //    if((input == "rock") && (optionsList[key] == "lizard" || optionsList[key] == "scissors"))
+            //    {
+            //        Console.WriteLine("You Win");
+            //        userScore++;
+            //    }
+            //    // Paper Block --------------------------------------------------------------------------------
+            //    if ((input == "paper") && (optionsList[key] == "scissors" || optionsList[key] == "lizard"))
+            //    {
+            //        Console.WriteLine("You Lose");
+            //        computerScore++;
+            //    }
+            //    if ((input == "paper") && (optionsList[key] == "rock" || optionsList[key] == "spock"))
+            //    {
+            //        Console.WriteLine("You Win");
+            //        userScore++;
+            //    }
 
-            // Create Randomizer
-            Random rnd = new Random();
-            int key = rnd.Next(optionsList.Count());
+            //    // Scissors Block --------------------------------------------------------------------------------
+            //    if ((input == "scissors") && (optionsList[key] == "rock" || optionsList[key] == "spock"))
+            //    {
+            //        Console.WriteLine("You Lose");
+            //        computerScore++;
+            //    }
+            //    if ((input == "scissors") && (optionsList[key] == "paper" || optionsList[key] == "lizard"))
+            //    {
+            //        Console.WriteLine("You Win");
+            //        userScore++;
+            //    }
 
-            //bool scenario1 
+            //    //Lizard Block --------------------------------------------------------------------------------
+            //    if ((input == "lizard") && (optionsList[key] == "scissors" || optionsList[key] == "rock"))
+            //    {
+            //        Console.WriteLine("You Lose");
+            //        computerScore++;
+            //    }
+            //    if ((input == "lizard") && (optionsList[key] == "spock" || optionsList[key] == "paper"))
+            //    {
+            //        Console.WriteLine("You Win");
+            //        userScore++;
+            //    }
 
-            // Print to console
-            Console.Clear();
-            Console.WriteLine("You chose - {0} \nThe computer chose - {1}", input, optionsList[key]);
+            //    //Spock Block --------------------------------------------------------------------------------
+            //    if ((input == "spock") && (optionsList[key] == "lizard" || optionsList[key] == "paper"))
+            //    {
+            //        Console.WriteLine("You Lose");
+            //        computerScore++;
+            //    }
+            //    if ((input == "spock") && (optionsList[key] == "rock" || optionsList[key] == "scissors"))
+            //    {
+            //        Console.WriteLine("You Win");
+            //        userScore++;
+            //    }
 
-            // Dictionary of scenarios
-            Dictionary<string, string> scenarios = new Dictionary<string, string>();
-            scenarios.Add(input, optionsList[0]);
-
-            // Conditionals
-
-            // If Draw
-            if (input == optionsList[key])
-            {
-                Console.WriteLine("Draw \nNo points given");
-            }
-            // Rock Block --------------------------------------------------------------------------------
-            if ((input == "rock") && (optionsList[key] == "paper"  || optionsList[key] == "spock" ))
-            {
-                Console.WriteLine("You Lose");
-                computerScore++;
-            }
-            if((input == "rock") && (optionsList[key] == "lizard" || optionsList[key] == "scissors"))
-            {
-                Console.WriteLine("You Win");
-                userScore++;
-            }
-            // Paper Block --------------------------------------------------------------------------------
-            if ((input == "paper") && (optionsList[key] == "scissors" || optionsList[key] == "lizard"))
-            {
-                Console.WriteLine("You Lose");
-                computerScore++;
-            }
-            if ((input == "paper") && (optionsList[key] == "rock" || optionsList[key] == "spock"))
-            {
-                Console.WriteLine("You Win");
-                userScore++;
-            }
-
-            // Scissors Block --------------------------------------------------------------------------------
-            if ((input == "scissors") && (optionsList[key] == "rock" || optionsList[key] == "spock"))
-            {
-                Console.WriteLine("You Lose");
-                computerScore++;
-            }
-            if ((input == "scissors") && (optionsList[key] == "paper" || optionsList[key] == "lizard"))
-            {
-                Console.WriteLine("You Win");
-                userScore++;
-            }
-
-            //Lizard Block --------------------------------------------------------------------------------
-            if ((input == "lizard") && (optionsList[key] == "scissors" || optionsList[key] == "rock"))
-            {
-                Console.WriteLine("You Lose");
-                computerScore++;
-            }
-            if ((input == "lizard") && (optionsList[key] == "spock" || optionsList[key] == "paper"))
-            {
-                Console.WriteLine("You Win");
-                userScore++;
-            }
-
-            //Spock Block --------------------------------------------------------------------------------
-            if ((input == "spock") && (optionsList[key] == "lizard" || optionsList[key] == "paper"))
-            {
-                Console.WriteLine("You Lose");
-                computerScore++;
-            }
-            if ((input == "spock") && (optionsList[key] == "rock" || optionsList[key] == "scissors"))
-            {
-                Console.WriteLine("You Win");
-                userScore++;
-            }
-
-            PrintScore(userScore, computerScore);
+            //    PrintScore(userScore, computerScore);
         }
 
-        public static void PrintScore(int uScore, int cScore)
+        public static int ChoiceValueNums(string choice)
         {
-            int userTotal = uScore++;
-            int computerTotal = cScore++;
-
-            Console.WriteLine();
-            if (uScore > cScore)
+            if (choice == "rock")
             {
-                Console.WriteLine("You're Ahead!!!");
+                return 0;
             }
-            if (uScore < cScore)
+            if (choice == "paper")
             {
-                Console.WriteLine("Uh oh, you're behind :(");
+                return 1;
+            }
+            if (choice == "scissors")
+            {
+                return 2;
+            }
+            if (choice == "lizard")
+            {
+                return 3;
+            }
+            if (choice == "spock")
+            {
+                return 4;
             }
             else
             {
-                Console.WriteLine("Don't stop, it's a tied game!");
+                return -1;
             }
-
-            Console.WriteLine("You : {0} \nComputer : {1}", userTotal, computerTotal);
         }
+        //public static void PrintScore(int uScore, int cScore)
+        //{
+        //    int userTotal = uScore++;
+        //    int computerTotal = cScore++;
+
+        //    Console.WriteLine();
+        //    if (uScore > cScore)
+        //    {
+        //        Console.WriteLine("You're Ahead!!!");
+        //    }
+        //    if (uScore < cScore)
+        //    {
+        //        Console.WriteLine("Uh oh, you're behind :(");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Don't stop, it's a tied game!");
+        //    }
+
+        //    Console.WriteLine("You : {0} \nComputer : {1}", userTotal, computerTotal);
+        //}
     }
 }
